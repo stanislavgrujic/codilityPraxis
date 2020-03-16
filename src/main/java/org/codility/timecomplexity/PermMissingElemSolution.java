@@ -25,31 +25,18 @@ package org.codility.timecomplexity;
  */
 public class PermMissingElemSolution {
 
-    public int solution(int A[]) {
-        int min = 2;
-        int max = 0;
+    public int solution(int[] A) {
+        long expected = (A.length + 1) * (A.length + 2) / 2;
+        long actual = sum(A);
+
+        return Long.valueOf(expected - actual).intValue();
+    }
+
+    private long sum(int[] a) {
         long sum = 0;
-        final int arrayLength = A.length;
-        if (arrayLength == 0) {
-            return 1;
+        for (int value : a) {
+            sum += value;
         }
-        if (arrayLength == 1) {
-            return A[0] - 1;
-        }
-        for (final int element : A) {
-            if (element < min) {
-                min = element;
-            } else if (element > max) {
-                max = element;
-            }
-            sum += element;
-        }
-
-        if (min == 2) {
-            return 1;
-        }
-
-        long expectedSum = arrayLength * (arrayLength + 1)/ 2;
-        return (int) (expectedSum - sum);
+        return sum;
     }
 }
